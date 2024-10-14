@@ -30,7 +30,7 @@ This file defines several small linters.
     if ← isAutoDecl declName then return none
     if isGlobalInstance (← getEnv) declName then return none
     let nm := declName.components
-    let some (dup, _) := nm.zip nm.tail! |>.find? fun (x, y) => x == y
+    let some (dup, _) := nm.zip (nm.tail?.getD []) |>.find? fun (x, y) => x == y
       | return none
     return m!"The namespace {dup} is duplicated in the name"
 
